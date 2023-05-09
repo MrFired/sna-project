@@ -1,0 +1,18 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+fastapi = "*"
+pydantic = "*"
+uvicorn = "*"
+python-dotenv = "*"
+
+[dev-packages]
+flake8 = "*"
+refurb = "*"
+pyright = "*"
+
+[requires]
+python_version = "3.11"
