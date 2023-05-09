@@ -1,10 +1,10 @@
-FROM python:3.10.5-slim-buster
+FROM python:3.11-slim-buster
 
-COPY Pipfile /app/
-COPY Pipfile.lock /app/
 WORKDIR /app
+COPY Pipfile .
+COPY Pipfile.lock .
 RUN pip3 install pipenv && pipenv install --deploy --clear --system;
-COPY .env /app/
+COPY .env .
 
 COPY src ./src
 EXPOSE 5000

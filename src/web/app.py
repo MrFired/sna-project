@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.responses import HTMLResponse
 
-from src.confg import Config
+from src.config import Config
 
 app = FastAPI()
 config = Config()
