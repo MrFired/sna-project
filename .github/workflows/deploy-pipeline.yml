@@ -16,6 +16,7 @@ jobs:
     - uses: actions/checkout@v3
     - name: Setup and configure SSH
       run: |
+        mkdir -p ~/.ssh/
         echo "$SSH_KEY" > ~/.ssh/$SSH_KEY_NAME
         chmod 600 ~/.ssh/$SSH_KEY_PATH
         ssh-keyscan -p $SSH_PORT -H $SSH_HOST > ~/.ssh/known_hosts
