@@ -4,13 +4,26 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-22.04
+    env:
+      SSH_KEY_NAME: github-actions
+      SSH_KEY: ${{ secrets.SSH_PRIVATE_KEY }} 
+      SSH_USER: ${{ secrets.SSH_USER }}
+      SSH_HOST: ${{ secrets.SSH_PROXY }}
+      SSH_PORT: ${{ secrets.SSH_PORT }}
     steps:
     - uses: actions/checkout@v3
     - name: Setup and configure SSH
       run: |
-        cat ${{ secrets.SSH_PRIVATE_KEY }} > ./.ssh/github-actions
-        chmod 600 ./.ssh/github-actions
-        ssh-keyscan -p ${{ secrets.SSH_PORT }} -H ${{ secrets.SSH_PROXY }} > ./.ssh/known_hosts
-        chmod 700 ./.ssh
+        echo "$SSH_KEY" > ~/.ssh/$SSH_KEY_NAME
+        chmod 600 ~/.ssh/$SSH_KEY_PATH
+        ssh-keyscan -p $SSH_PORT -H $SSH_HOST > ~/.ssh/known_hosts
+        chmod 700 ~/.ssh
+        cat >> ~/.ssh/config << END
+          Host deployer
+            HostName $SSH_HOST
+            User $SSH_USER
+            Port $SSH_PORT
+            IdentityFile ~/.ssh/$SSH_KEY_NAME
+          END
     - name: Copy repository to remote server
-      run: rsync -avz -e "ssh -p ${{ secrets.SSH_PORT }}" ./sna-project/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_PROXY }}:/home/${{ secrets.SSH_USER }}/sna-project
+      run: rsync -avz ./sna-project/ deployer:/home/$SSH_USER/sna-project
