@@ -1,0 +1,16 @@
+name: Deploy to remote server
+on:
+  workflow_dispatch
+jobs:
+  deploy:
+    runs-on: ubuntu-22.04
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup and configure SSH
+      run: |
+        cat ${{ secrets.SSH_PRIVATE_KEY }} > ./.ssh/github-actions
+        chmod 600 ./.ssh/github-actions
+        ssh-keyscan -p ${{ secrets.SSH_PORT }} -H ${{ secrets.SSH_PROXY }} > ./.ssh/known_hosts
+        chmod 700 ./.ssh
+    - name: Copy repository to remote server
+      run: rsync -avz -e "ssh -p ${{ secrets.SSH_PORT }}" ./sna-project/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_PROXY }}:/home/${{ secrets.SSH_USER }}/sna-project
