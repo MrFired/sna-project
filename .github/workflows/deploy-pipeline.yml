@@ -29,4 +29,4 @@ jobs:
           IdentityFile ~/.ssh/$SSH_KEY_NAME
         END
     - name: Copy repository to remote server
-      run: rsync -avz ./sna-project/ deployer:/home/$SSH_USER/sna-project
+      run: rsync -avz . deployer:/home/$SSH_USER/sna-project
