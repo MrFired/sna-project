@@ -22,11 +22,11 @@ jobs:
         chmod 600 ~/.ssh/$SSH_KEY_NAME
         ssh-keyscan -p $SSH_PORT -H $SSH_HOST > ~/.ssh/known_hosts
         cat >> ~/.ssh/config << END
-          Host deployer
-            HostName $SSH_HOST
-            User $SSH_USER
-            Port $SSH_PORT
-            IdentityFile ~/.ssh/$SSH_KEY_NAME
-          END
+        Host deployer
+          HostName $SSH_HOST
+          User $SSH_USER
+          Port $SSH_PORT
+          IdentityFile ~/.ssh/$SSH_KEY_NAME
+        END
     - name: Copy repository to remote server
       run: rsync -avz ./sna-project/ deployer:/home/$SSH_USER/sna-project
