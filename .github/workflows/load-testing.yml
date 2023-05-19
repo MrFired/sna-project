@@ -1,0 +1,16 @@
+name: Run load tests
+on:
+  workflow_dispatch
+jobs:
+  load-testing:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install K6 
+        run: sudo snap install k6
+      - name: Run tests
+        run: |
+          k6 run stress_test.js
+          k6 run spike_test.js
+          k6 run load_test.js
+          k6 run soak_test.js
