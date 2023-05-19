@@ -8,10 +8,6 @@ from src.services import load_html
 app = FastAPI()
 config = Config()
 
-# Serve static files
-if config.STATIC_FILES:
-    app.mount("/static", StaticFiles(directory=str(config.STATIC_FILES)), name="static")
-
 @app.get("/")
 async def main_page():
     index_html = load_html("index.html")
