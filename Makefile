@@ -8,7 +8,7 @@ init:
 build:
 	docker build . -t hoyo
 
-run: 
+run:
 	docker run -p 5000:5000 --rm hoyo
 
 lint:
@@ -17,10 +17,10 @@ lint:
 
 typecheck:
 	pipenv run pyright
-	
+
 deploy:
 	minikube start
 	minikube image build -t hoyo .
-	minikube kubectl -- create -f deployment.yaml
-	minikube kubectl -- wait --for=condition=available deployment/hoyoweb
-	minikube kubectl -- port-forward deployment/hoyoweb 5000:5000 &
+	kubectl create -f deployment.yaml
+	kubectl wait --for=condition=available deployment/hoyoweb
+	kubectl port-forward deployment/hoyoweb 5000:5000 &
