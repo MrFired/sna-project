@@ -24,4 +24,4 @@ deploy:
 	minikube image build -t hoyo .
 	kubectl create -f deployment.yaml
 	kubectl wait --for=condition=available deployment/hoyoweb
-	
+	sudo systemctl start sna-project-pf.service
