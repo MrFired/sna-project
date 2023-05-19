@@ -23,4 +23,4 @@ deploy:
 	minikube image build -t hoyo .
 	kubectl create -f deployment.yaml
 	kubectl wait --for=condition=available deployment/hoyoweb
-	kubectl port-forward deployment/hoyoweb 5000:5000 &
+	sh -c "kubectl port-forward deployment/hoyoweb 5000:5000 &" && exit
