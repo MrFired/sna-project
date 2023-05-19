@@ -17,4 +17,10 @@ lint:
 
 typecheck:
 	pipenv run pyright
-
+	
+deploy:
+	minikube start
+	minikube image build -t hoyo .
+	minikube kubectl -- create -f deployment.yaml
+	minikube kubectl -- wait --for=condition=available deployment/hoyoweb
+	minikube kubectl -- port-forward deployment/hoyoweb 5000:5000 &
