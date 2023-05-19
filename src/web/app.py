@@ -12,7 +12,7 @@ config = Config()
 
 app.mount(
     "/static",
-    StaticFiles(directory=(ROOT_DIR / "src" / config.STATIC_FILES)),
+    StaticFiles(directory=(ROOT_DIR / config.STATIC_FILES)),
     name="static",
 )
 
