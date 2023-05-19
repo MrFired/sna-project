@@ -30,5 +30,7 @@ jobs:
         END
     - name: Copy repository to remote server
       run: rsync -avz . deployer:/home/$SSH_USER/sna-project
+    - name: Generate environment from dist
+      run: ssh deployer 'cd ~/sna-project && cp .env.dist .env'
     - name: Deploy the web server
       run: ssh deployer 'cd ~/sna-project && make deploy'
