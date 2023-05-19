@@ -20,6 +20,7 @@ typecheck:
 
 deploy:
 	minikube delete
+	sudo systemctl stop sna-project-pf.service
 	minikube start
 	minikube image build -t hoyo .
 	kubectl create -f deployment.yaml
