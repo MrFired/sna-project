@@ -1,7 +1,7 @@
 body {
     display: grid;
     grid-template-areas: "logo header" "logo-2 container" "logo-3 container" "logo-4 container";
-    background-image: url('/static/hoyo_back.jpg');
+    background-image: url('/static/images/hoyo_back.jpg');
     background-size: cover;
     opacity: 0.9;
     font-family: 'Times New Roman', Times, serif;
