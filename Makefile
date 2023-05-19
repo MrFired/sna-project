@@ -8,7 +8,7 @@ init:
 build:
 	docker build . -t hoyo
 
-run: 
+run:
 	docker run -p 5000:5000 --rm hoyo
 
 lint:
@@ -18,3 +18,11 @@ lint:
 typecheck:
 	pipenv run pyright
 
+deploy:
+	minikube delete
+	sudo systemctl stop sna-project-pf.service
+	minikube start
+	minikube image build -t hoyo .
+	kubectl create -f deployment.yaml
+	kubectl wait --for=condition=available deployment/hoyoweb
+	sudo systemctl start sna-project-pf.service

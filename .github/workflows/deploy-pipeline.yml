@@ -1,0 +1,36 @@
+name: Deploy to remote server
+on:
+  push:
+    branches:
+      - main
+jobs:
+  deploy:
+    runs-on: ubuntu-22.04
+    env:
+      SSH_KEY_NAME: github-actions
+      SSH_KEY: ${{ secrets.SSH_PRIVATE_KEY }} 
+      SSH_USER: ${{ secrets.SSH_USER }}
+      SSH_HOST: ${{ secrets.SSH_PROXY }}
+      SSH_PORT: ${{ secrets.SSH_PORT }}
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup and configure SSH
+      run: |
+        mkdir -p ~/.ssh/
+        chmod 700 ~/.ssh
+        echo "$SSH_KEY" > ~/.ssh/$SSH_KEY_NAME
+        chmod 600 ~/.ssh/$SSH_KEY_NAME
+        ssh-keyscan -p $SSH_PORT -H $SSH_HOST > ~/.ssh/known_hosts
+        cat >> ~/.ssh/config << END
+        Host deployer
+          HostName $SSH_HOST
+          User $SSH_USER
+          Port $SSH_PORT
+          IdentityFile ~/.ssh/$SSH_KEY_NAME
+        END
+    - name: Copy repository to remote server
+      run: rsync -avz . deployer:/home/$SSH_USER/sna-project
+    - name: Generate environment from dist
+      run: ssh deployer 'cd ~/sna-project && cp .env.dist .env'
+    - name: Deploy the web server
+      run: ssh deployer 'cd ~/sna-project && make deploy'
