@@ -10,7 +10,7 @@ jobs:
         run: sudo snap install k6
       - name: Run tests
         run: |
-          k6 run stress_test.js
-          k6 run spike_test.js
-          k6 run load_test.js
-          k6 run soak_test.js
+          k6 run tests/stress_test.js
+          k6 run tests/spike_test.js
+          k6 run tests/load_test.js
+          k6 run tests/soak_test.js
