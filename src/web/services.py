@@ -3,6 +3,7 @@ from pathlib import Path
 from src.typings import RawHTML, as_raw_html
 from src.config import Config
 
+
 config = Config()
 
 
