@@ -1,0 +1,149 @@
+body {
+    display: grid;
+    grid-template-areas: "logo header" "logo-2 container" "logo-3 container" "logo-4 container";
+    background-image: url('/static/hoyo_back.jpg');
+    background-size: cover;
+    opacity: 0.9;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 14px;
+    height: 100vh;
+    margin: 0;
+    grid-gap: 1px;
+    grid-template-rows: 50px 50px 50px 1fr;
+    grid-template-columns: 50px 1fr;
+    grid-auto-flow: dense;
+}
+
+.title {
+    padding: 0%;
+    grid-area: header;
+}
+
+.title-text {
+    margin-top: 3px;
+    font-size: 18px;
+    white-space: nowrap;
+    padding-left: 5px;
+    line-height: 50px;
+    justify-content: center;
+    display: flex;
+}
+
+.logo {
+    grid-area: logo;
+    background: rgb(192, 255, 192);
+    height: 100%;
+    margin: 0%;
+    box-shadow: 0 0 10px;
+    padding: 0;
+    border-radius: 5%;
+    object-fit: cover;
+    overflow: hidden;
+}
+
+img.logo {
+    border-radius: 5%;
+    width: 50px;
+    height: 50px;
+}
+
+.logo-2 {
+    grid-area: logo-2;
+    background: rgb(192, 255, 192);
+    height: 100%;
+    margin: 0%;
+    box-shadow: 0 0 10px;
+    padding: 0;
+    border-radius: 5%;
+    object-fit: cover;
+    overflow: hidden;
+}
+
+img.logo-2 {
+    border-radius: 5%;
+    width: 50px;
+    height: 50px;
+}
+
+.logo-3 {
+    grid-area: logo-3;
+    background: rgb(192, 255, 192);
+    height: 100%;
+    margin: 0%;
+    box-shadow: 0 0 10px;
+    padding: 0;
+    border-radius: 5%;
+    object-fit: cover;
+    overflow: hidden;
+}
+
+img.logo-3 {
+    border-radius: 5%;
+    width: 50px;
+    height: 50px;
+}
+
+.logo-4 {
+    grid-area: logo-4;
+    background: rgb(192, 255, 192);
+    height: 100%;
+    margin: 0%;
+    box-shadow: 0 0 10px;
+    padding: 0;
+    border-radius: 5%;
+    object-fit: cover;
+    overflow: hidden;
+}
+
+img.logo-4 {
+    border-radius: 5%;
+    width: 50px;
+    height: 50px;
+}
+
+p {
+    margin-block-start: 5px;
+    margin-block-end: 5px;
+}
+
+.container {
+    grid-area: container;
+    display: flex;
+}
+
+.column {
+    flex-grow: 1;
+    flex: 1 1 33.33%;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.9);
+    margin-left: 10px;
+    margin-right: 10px;
+    border-radius: 5%;
+}
+
+.title-column {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.title-column img {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+}
+
+.title-column h2 {
+    margin: 0;
+}
+
+hr {
+    border-top: 2px solid black;
+    margin-bottom: 10px;
+}
+
+.text {
+    text-align: center;
+    font-size: large;
+    color: #4310cf;
+}
