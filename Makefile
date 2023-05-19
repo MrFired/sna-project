@@ -19,8 +19,9 @@ typecheck:
 	pipenv run pyright
 
 deploy:
+	minikube delete
 	minikube start
 	minikube image build -t hoyo .
 	kubectl create -f deployment.yaml
 	kubectl wait --for=condition=available deployment/hoyoweb
-	sh -c "kubectl port-forward deployment/hoyoweb 5000:5000 &" && exit
+	kubectl port-forward deployment/hoyoweb 5000:5000 > /dev/null &
